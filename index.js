@@ -44,12 +44,24 @@ class BlockChain
             var currentBlockHash=this.chain[i];
             var previousBlockHash=this.chain[i-1];
             if(currentBlockHash.hash !== currentBlockHash.calculateHash()){
-                return false;
+                var data={
+                    "Message":"Sorry !!!!!!!!!!!!!! You are unauthorised",
+                    "Info":"Go TO pavilion !!!!!!!!!!!!!!!!!!!!!!!!",
+                }
+                return data;
             }
             if(currentBlockHash.prevHash !== previousBlockHash.hash){
-                return false;
+                var data={
+                    "Message":"Sorry !!!!!!!!!!!!!! You are unauthorised",
+                    "Info":"Go TO pavilion !!!!!!!!!!!!!!!!!!!!!!!!",
+                }
+                return data;
             }
-            return true;
+            var data={
+                "Message":"Congratulation You are Authorised User",
+                "Info":this.chain,
+            }
+            return data;
         }
     }
 }
@@ -61,7 +73,7 @@ const block = new Block("12-10-19",{amount:100});
 
 //block added out chain 
 ChainTree.addBlock(block);
-console.log(ChainTree.isValideted());
+// console.log(ChainTree.isValideted());
 
 ChainTree.chain[0].hash="Hacked";
 console.log(ChainTree.isValideted());
