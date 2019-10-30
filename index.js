@@ -38,6 +38,20 @@ class BlockChain
         newBlock.hash=newBlock.calculateHash();
         this.chain.push(newBlock);
     }
+
+    isValideted(){
+        for(var i =1;i<this.chain.length;i++){
+            var currentBlockHash=this.chain[i];
+            var previousBlockHash=this.chain[i-1];
+            if(currentBlockHash.hash !== currentBlockHash.calculateHash()){
+                return false;
+            }
+            if(currentBlockHash.prevHash !== previousBlockHash.hash){
+                return false;
+            }
+            return true;
+        }
+    }
 }
 
 const ChainTree=new BlockChain();
@@ -46,6 +60,8 @@ const ChainTree=new BlockChain();
 const block = new Block("12-10-19",{amount:100});
 
 //block added out chain 
-
 ChainTree.addBlock(block);
-console.log(ChainTree);
+console.log(ChainTree.isValideted());
+
+ChainTree.chain[0].hash="Hacked";
+console.log(ChainTree.isValideted());
